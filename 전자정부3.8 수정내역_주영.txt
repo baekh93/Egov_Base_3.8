@@ -1,0 +1,19 @@
+# PostgreSQL 문제
+
+시간 관련 컬럼이 DB상에는 Timestamp로 되어있는데,
+쿼리에서 TO_CHAR(NOW(),'YYYY-mm-dd HH24:MI:SS')와 같은 형식으로 문자열로 작성 되어있음
+이부분을 NOW() 와 같이 Date타입으로 바꿔야함.
+맞는 테이블과 안맞는 테이블이 있음.. 확인해야함..
+
+
+EgovGroupManage_SQL_postgres.xml
+33행 insertGroup
+TO_CHAR(NOW(),'YYYY-mm-dd HH24:MI:SS') >> NOW()로 수정
+
+
+# 권한 동적 리로드
+ @Resource(name="databaseSecurityMetadataSource")
+    EgovReloadableFilterInvocationSecurityMetadataSource databaseSecurityMetadataSource; 
+
+변경되는 부분에서 아래 구문 실행
+databaseSecurityMetadataSource.reload();
